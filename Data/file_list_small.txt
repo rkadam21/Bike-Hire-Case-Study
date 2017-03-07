@@ -1,0 +1,4 @@
+http://cycling.data.tfl.gov.uk/usage-stats/38JourneyDataExtract28Dec2016-03Jan2017.csv
+http://cycling.data.tfl.gov.uk/usage-stats/40JourneyDataExtract11Jan2017-17Jan2017.csv
+http://cycling.data.tfl.gov.uk/usage-stats/41JourneyDataExtract18Jan2017-24Jan2017.csv
+http://cycling.data.tfl.gov.uk/usage-stats/42JourneyDataExtract25Jan2017-31Jan2017.csv
