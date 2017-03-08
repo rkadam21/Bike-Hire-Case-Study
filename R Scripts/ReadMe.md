@@ -9,3 +9,4 @@ To use this script please follow the below steps
   * The **fileList** above can be a text file with the list of the files either as URLs to a webiste or relative paths to the location of the data files.
   * From the repo, you can use _file_list_small.txt_ from the **Data** folder as the **fileList** as it downloads a small subset of cycling data from the TFL website.
 3. The script has a **read.zip()** function that is internally called to extract csv files from a zip file. This function can be called on it's own as well.
+4. The script is currently being worked up on to add a data cleansing section. The function **cleanData()** is currently being worked up on.
