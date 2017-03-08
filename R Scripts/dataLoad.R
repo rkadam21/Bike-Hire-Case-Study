@@ -5,7 +5,7 @@
 
 #####Extract Data Function#####
 
-extractData <- function (filelist) {a
+extractData <- function (filelist) {
     fileList <- read.table(filelist, header=F, sep='\t');
     fileListVec <- as.vector(fileList$V1);
   
@@ -40,7 +40,7 @@ read.zip <- function(files){
 #####End of Read Zip function#####
 
 #####Clean Data Function#####
-cleanData <- function(){
-  
+cleanData <- function(dataset){
+    datasetC<<- dataset[!is.na(dataset$EndStation.Id),]
 }
 #####End of Clean Data Function#####
