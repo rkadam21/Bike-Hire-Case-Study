@@ -41,6 +41,6 @@ read.zip <- function(files){
 
 #####Clean Data Function#####
 cleanData <- function(dataset){
-    datasetC<<- dataset[!is.na(dataset$EndStation.Id),]
+    datasetC<<- dataset[!is.na(dataset$EndStation.Id),];
 }
 #####End of Clean Data Function#####
