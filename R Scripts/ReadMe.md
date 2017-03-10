@@ -1,5 +1,5 @@
 # Using the R Scripts
-## _[dataLoad.R](https://github.com/rkadam21/Bike-Hire-Case-Study/blob/master/R%20Scripts/dataLoad.R)_
+## [dataLoad.R](https://github.com/rkadam21/Bike-Hire-Case-Study/blob/master/R%20Scripts/dataLoad.R)
 This script helps load data from multiple csv formatted files or csv formatted files packaged as a zip file into a single dataframe.
 
 To use this script please follow the below steps
