@@ -1,12 +1,15 @@
 # Using the R Scripts
 ## [dataLoad.R](https://github.com/rkadam21/Bike-Hire-Case-Study/blob/master/R%20Scripts/dataLoad.R)
-This script helps load data from multiple csv formatted files or csv formatted files packaged as a zip file into a single dataframe.
+This script helps load data from multiple csv formatted files or csv formatted files packaged as a zip file into a single dataframe. This script can be sourced with source command. _source("dataLoad.R")_. Brief explanation for each function in the script has been provided below.
+### extractData(file)
+This function helps load data from multiple csv formatted files or csv formatted files packaged as a zip file into a single dataframe.  
+* The location of the csv files should be passed to the function as a list in a _.txt_ file.  _Example: extractData(filelist.txt)_
+* From the repo, you can use *file_list_small.txt* from the _Data_ folder as the _fileList_ as it downloads a small subset of cycling data from the TFL website.
+* csv files packaged as zip files are also read through this function. As long as the file name in the _filelist_ is suffixed by the file type _.zip_ or _.csv_ the function will automatically read the file. The _extractData()_ function internally calls the _read.zip()_ function to extract the data.  
 
-To use this script please follow the below steps
-
-1. Source the R script with **source(dataLoad.R)** or the relative path to the script from the working directory.
-2. Execute the **extractData(fileList)** function to load the data in the Global environment.
-  * The **fileList** above can be a text file with the list of the files either as URLs to a webiste or relative paths to the location of the data files.
-  * From the repo, you can use _file_list_small.txt_ from the **Data** folder as the **fileList** as it downloads a small subset of cycling data from the TFL website.
-3. The script has a **read.zip()** function that is internally called to extract csv files from a zip file. This function can be called on it's own as well.
-4. The script is currently being worked up on to add a data cleansing section. The function **cleanData()** is currently being worked up on.
+### read.zip(file.zip)
+This function is internally called in the _extractData()_ function to extract csv files from a zip file. This function can be called on it's own as well.
+  * The name of the zip file that includes is relative path needs to be provided to this function.
+  * This function can be directly executed after loading the R Script.  
+   _Example: read.zip(file.zip)_
+  * This function in it's operational state is designed to pass data to its parent function. This can be easily modified to output the data as a dataframe to the parent environment or to the console.
