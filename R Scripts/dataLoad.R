@@ -30,22 +30,32 @@ cleanData <- function(dataset){
     #dataset <- head(dataset,100);
     datasetC<<- dataset[!is.na(dataset$EndStation.Id),];
     
-    datasetC$Start.Date <- strptime(x=as.character(datasetC$Start.Date), format = "%d/%m/%Y %H:%M");
-    datasetC$End.Date <- strptime(x=as.character(datasetC$End.Date), format = "%d/%m/%Y %H:%M");
+    datasetC$Start.Date <- strptime(x=as.character(datasetC$Start.Date)
+                                    ,format = "%d/%m/%Y %H:%M");
+    datasetC$End.Date <- strptime(x=as.character(datasetC$End.Date)
+                                  ,format = "%d/%m/%Y %H:%M");
     
     #load Borough and Coordinate data to be added to the final dataset
     #make sure the file is downloaded and placed at a relative path as below
-    #In the future this data can be downloaded directly from an API on the TFL website. https://api.tfl.gov.uk/swagger/ui/index.html?url=/swagger/docs/v1#!/BikePoint/BikePoint_GetAll
-    dBorCordStrt <<- read.csv("../Data/Docking station Boroughs and Coords.csv", colClasses= c(NA,NA,"NULL","NULL",NA,NA)
-                                  ,header=T, col.names=c('Start.Site','Start.Borough','Start.Easting','Start.Northing','Start.Latitude','Start.Longitude'));
-    dBorCordEnd <<- read.csv("../Data/Docking station Boroughs and Coords.csv", colClasses= c(NA,NA,"NULL","NULL",NA,NA)
-                                  ,header=T, col.names=c('End.Site','End.Borough','End.Easting','End.Northing','End.Latitude','End.Longitude'));
+    #In the future this data can be downloaded directly from an API on the TFL website. 
+    #https://api.tfl.gov.uk/swagger/ui/index.html?url=/swagger/docs/v1#!/BikePoint/BikePoint_GetAll
+    dBorCordStrt <<- read.csv("../Data/Docking station Boroughs and Coords.csv"
+                              ,colClasses= c(NA,NA,"NULL","NULL",NA,NA)
+                              ,header=T
+                              ,col.names=c('Start.Site','Start.Borough','Start.Easting','Start.Northing','Start.Latitude','Start.Longitude'));
+    dBorCordEnd <<- read.csv("../Data/Docking station Boroughs and Coords.csv"
+                             ,colClasses= c(NA,NA,"NULL","NULL",NA,NA)
+                             ,header=T
+                             ,col.names=c('End.Site','End.Borough','End.Easting','End.Northing','End.Latitude','End.Longitude'));
     
     
     #substring the Station names to bare site names for merge operation
-    #merge with Borough and Coordinate file to get Borough and Coordinates for Start and End statiosn for each rental
-    datasetC$Start.Site <- sapply(datasetC$StartStation.Name, FUN=function(vec){trim(substring(vec, 1, regexpr(',',vec)[1]-1))});
-    datasetC$End.Site <- sapply(datasetC$EndStation.Name, FUN=function(vec){trim(substring(vec, 1, regexpr(',',vec)[1]-1))});
+    #merge with Borough and Coordinate file to get Borough and Coordinates 
+    #for Start and End stations for each rental
+    datasetC$Start.Site <- sapply(datasetC$StartStation.Name
+                                  ,FUN=function(vec){trim(substring(vec, 1, regexpr(',',vec)[1]-1))});
+    datasetC$End.Site <- sapply(datasetC$EndStation.Name
+                                ,FUN=function(vec){trim(substring(vec, 1, regexpr(',',vec)[1]-1))});
     datasetBC <- merge(datasetC,dBorCordStrt, by.x="Start.Site",by.y="Start.Site", all.x=TRUE);
     datasetBC <- merge(datasetBC,dBorCordEnd, by.x = "End.Site",by.y="End.Site", all.x=TRUE);
     
@@ -61,6 +71,10 @@ cleanData <- function(dataset){
 }
 #####End of Clean Data Function#####
 
+#####Sample Data Function#####
+analyze <- function(df) {
+  dfS <<- do.call(rbind, lapply(split(df,df$Bike.Id), function(i){prop.table(table(i$Start.Borough))}))
+}
 #####Read from a Zip File#####
 # This is a sister function that is called in the Extract Data Function for reading zip file.
 
